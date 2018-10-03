@@ -34,4 +34,4 @@ cat.onload = function() {
   stage.add(layer);
 };
 
-cat.src = '/assets/cat1.jpg';
+cat.src = 'assets/cat1.jpg';
