@@ -15,16 +15,20 @@ stage.add(layer);
 var cat = new Image();
 
 cat.onload = function() {
-  var cat1 = new Konva.Image({
-    x: 50,
-    y: 50,
-    image: cat,
-    width: 200,
-    height: 200
-  });
-
-  // add the shape to the layer
-  layer.add(cat1);
+    for(var i = 0; i < 10; i++)
+    {
+        var cat1 = new Konva.Image({
+            x: Math.random() * stage.getWidth(),
+            y: Math.random() * stage.getHeight(),
+            image: cat,
+            width: 200,
+            height: 200,
+            rotation: Math.random() * 180,
+          });
+    
+         // add the shape to the layer
+          layer.add(cat1);
+    }
 
   // add the layer to the stage
   stage.add(layer);
