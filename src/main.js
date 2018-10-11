@@ -40,4 +40,4 @@ cat.onload = function() {
   stage.add(layer);
 };
 
-cat.src = '/assets/cat1.png';
+cat.src = '/CatClicker500/assets/cat1.png';
