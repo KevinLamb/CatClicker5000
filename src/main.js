@@ -25,13 +25,19 @@ cat.onload = function() {
             height: 200,
             rotation: Math.random() * 180,
           });
-    
+        
+         cat1.on('click', function (evt) {
+            this.destroy();
+            layer.draw();
+            console.log("Check"); 
+         });
+        
          // add the shape to the layer
-          layer.add(cat1);
+            layer.add(cat1);
     }
 
   // add the layer to the stage
   stage.add(layer);
 };
 
-cat.src = '/CatClicker5000/assets/cat1.png';
+cat.src = '/assets/cat1.png';
