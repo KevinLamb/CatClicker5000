@@ -1,50 +1,58 @@
+//initializes global variables
 var width = window.innerWidth;
 var height = window.innerHeight;
+var interval = 7500;
+var catCount = 0;
 
+//creates the stage
 var stage = new Konva.Stage({
   container: 'container',
   width: width,
   height: height
 });
 
+//creates layer
 var layer = new Konva.Layer();
-
 // add the layer to the stage
 stage.add(layer);
 
-var cat = new Image();
-
-window.addEventListener('resize', function() {
-  stage.width(window.innerWidth);
-  stage.height(window.innerHeight);
-});
-
-cat.onload = function() {
-  window.setInterval(function() {createCat();stage.add(layer)}, 100);
-
-  for (var i = 0; i < 10; i++) {
-    createCat();
-  }
+//loads cat image
+var catImage = new Image();
+catImage.src = './assets/cat1.png';
+//initializing function
+catImage.onload = function() {
+  //begins game
+  window.setInterval(function() {update(); stage.add(layer)}, interval);
   // add the layer to the stage
   stage.add(layer);
 };
 
+//update function, updates game entities
+var update = () =>{
+  createCat();
+}
+
+//creates a cat object
 function createCat() {
-  var cat1 = new Konva.Image({
+  //initializes cat values
+  var catObject = new Konva.Image({
     x: Math.random() * stage.getWidth(),
     y: Math.random() * stage.getHeight(),
-    image: cat,
+    image: catImage,
     width: 200,
     height: 200,
     rotation: Math.random() * 180,
   });
 
-  cat1.on('click', function(evt) {
+  //click event
+  catObject.on('click', function(evt) {
     this.destroy();
+    catCount += 1;
     layer.draw();
-    console.log("Check");
-  });
-  layer.add(cat1);
-}
 
-cat.src = './assets/cat1.png';
+    console.log(catCount);
+  });
+
+  //adds cat to layer
+  layer.add(catObject);
+}
