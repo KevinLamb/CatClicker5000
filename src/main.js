@@ -1,9 +1,9 @@
 //initializes global variables
 var width = window.innerWidth;
 var height = window.innerHeight;
-var interval = 7500;
-var minInterval = 500;
-var intervalScalar = 5;
+var interval = 100;
+var minInterval = 20;
+var intervalScalar = 2;
 var catCount = 0;
 var currFrame = 0;
 
@@ -59,13 +59,12 @@ catImage.src = './assets/cat1.png';
 //initializing function
 catImage.onload = function() {
   //begins game
-  loop();
+  setInterval(loop,60)
 };
 
 //update function, updates game entities
 var update = () => {
-  interval = (interval >= minInterval) ? interval - (catCount * intervalScalar) : minInterval;
-  if (currFrame >= interval){
+  if (currFrame >= ((interval >= minInterval) ? interval - (catCount * intervalScalar) : minInterval)){
     createCat();
     currFrame = 0;
   }
@@ -80,5 +79,4 @@ var draw = () => {
 function loop() {
   update()
   draw()
-  setInterval(loop,60)
 }
