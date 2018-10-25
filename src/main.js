@@ -34,12 +34,39 @@ function createCat() {
     width: 200,
     height: 200,
     rotation: Math.random() * 180,
+    offset: {
+	x: 100,
+	y: 100
+    }
   });
 
+  var angularSpeed = 600;
+  var spinCat = new Konva.Animation(function(frame) {
+        var angleDiff = frame.timeDiff * angularSpeed / 1000;
+        catObject.rotate(angleDiff);
+
+	var curScale = catObject.scale();
+	catObject.scale({
+		x: curScale.x-0.01,
+		y: curScale.y-0.01
+	});
+
+	var curOpacity = catObject.opacity();
+	if (curOpacity > 0) catObject.opacity(curOpacity-0.02)
+	else catObject.opacity(0);
+  });
+	
   //click event
   catObject.on('click', function(evt) {
-    this.destroy();
+    catObject.removeEventListener('click');
     catCount += 1;
+
+    spinCat.start();
+
+    var that=this;
+    setTimeout(function() {
+    	that.destroy();
+    }, 1000);
   });
 
   //adds cat to layer
