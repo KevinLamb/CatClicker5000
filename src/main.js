@@ -2,16 +2,27 @@
 var width = window.innerWidth;
 var height = window.innerHeight;
 var interval = 100;
-var minInterval = 20;
+var minInterval = 10;
 var intervalScalar = 2;
 var catCount = 0;
 var currFrame = 0;
+
+document.getElementById('eas').addEventListener('click', function() {
+	interval = 100;
+});
+document.getElementById('med').addEventListener('click', function() {
+	interval = 70;
+});
+document.getElementById('har').addEventListener('click', function() {
+	interval = 40;
+	console.log(interval);
+});
 
 //creates the stage
 var stage = new Konva.Stage({
   container: 'container',
   width: width,
-  height: height
+  height: height-22
 });
 
 //creates score text
@@ -91,7 +102,8 @@ catImage.onload = function() {
 
 //update function, updates game entities
 var update = () => {
-  if (currFrame >= ((interval >= minInterval) ? interval - (catCount * intervalScalar) : minInterval)){
+  var tempInterval = interval - catCount * (intervalScalar);
+  if (currFrame >= ((tempInterval >= minInterval) ? tempInterval : minInterval)){
     createCat();
     currFrame = 0;
   }
