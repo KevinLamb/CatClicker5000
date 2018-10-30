@@ -1,0 +1,22 @@
+{
+  "name": "catclicker5000",
+  "version": "1.0.0",
+  "description": "Cat's and clicking.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KevinLamb/CatClicker5000.git"
+  },
+  "author": "Eros Dipede, Josh Gorman and Kevin Lambert",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KevinLamb/CatClicker5000/issues"
+  },
+  "homepage": "https://github.com/KevinLamb/CatClicker5000#readme",
+  "dependencies": {
+    "konva": "^2.5.0"
+  }
+}
