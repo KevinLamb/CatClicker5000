@@ -7,13 +7,15 @@ var intervalScalar = 2;
 var catCount = 0;
 var currFrame = 0;
 
-document.getElementById('eas').addEventListener('click', function() {
-	interval = 100;
+document.getElementById('easy').addEventListener('click', function() {
+  interval = 100;
+  console.log(interval);
 });
-document.getElementById('med').addEventListener('click', function() {
-	interval = 70;
+document.getElementById('medium').addEventListener('click', function() {
+  interval = 70;
+  console.log(interval);
 });
-document.getElementById('har').addEventListener('click', function() {
+document.getElementById('hard').addEventListener('click', function() {
 	interval = 40;
 	console.log(interval);
 });
@@ -46,8 +48,8 @@ function createCat() {
     height: 200,
     rotation: Math.random() * 180,
     offset: {
-	x: 100,
-	y: 100
+      x: 100,
+      y: 100
     }
   });
 
