@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Turret+Road&display=swap');
 
 html, body {
   overflow: hidden;
   background-color: #414a4c;
 }
+
 #buttons {
   position: relative;
   top: -100px;

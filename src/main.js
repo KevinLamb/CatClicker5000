@@ -33,8 +33,12 @@ var score = new Konva.Text({
   y: 20,
   text: '0',
   fontSize: 40,
-  fontFamily: 'Calibri',
-  fill: 'black'
+  fontFamily: 'Turret Road',
+  fill: 'purple',
+  shadowEnabled: true,
+  shadowOpacity: 0.75,
+  shadowColor: 'purple',
+  shadowBlur: 10
 });
 
 //creates a cat object
