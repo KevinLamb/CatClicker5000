@@ -6,6 +6,7 @@ var minInterval = 10;
 var intervalScalar = 2;
 var catCount = 0;
 var currFrame = 0;
+var horizonHeight = height / 2;
 
 document.getElementById('easy').addEventListener('click', function() {
   interval = 100;
@@ -41,35 +42,75 @@ var score = new Konva.Text({
   shadowBlur: 10
 });
 
+//Creates horizon for grid landscape
+var horizon = new Konva.Line({
+  points: [1, horizonHeight, width, horizonHeight],
+  fill: 'purple',
+  stroke: 'purple',
+  strokeWidth: 2,
+  closed: true,
+  shadowEnabled: true,
+  shadowOpacity: 0.75,
+  shadowColor: 'purple',
+  shadowBlur: 10
+});
+
 //Creates vertical lines for grid
 function createVerticalLines() {
+  var verticalLines = [];
 
-  var yLines = [];
-  var numberOfLines = 8;
-  var xTopRatio = 0.10;
-  var xBottomRatio = -0.50;
+  var leftRatioXTop = 10;
+  var leftRatioXBottom = 100;
 
-  for(var i = 0; i < numberOfLines; i++) {
-    var line = new Konva.Line({
-      points: [(stage.getWidth() * xTopRatio), 25, (stage.getWidth() * xBottomRatio), height],
-      stroke: 'purple',
-      strokeWidth: 5,
-      lineCap: 'round',
-      lineJoin: 'round',
-      shadowEnabled: true,
-      shadowOpacity: 0.75,
-      shadowColor: 'purple',
-      shadowBlur: 10
-    });
+  var rightRatioXTop = 10;
+  var rightRatioXBottom = 100;
 
-    yLines.push(line);
-
-    //Set ratio
-    xTopRatio += 0.115;
-    xBottomRatio += 0.2925;
+  for(var i = 0; i < 30; i++)
+  {
+    var poly = new Konva.Line({
+          points: [width / 2 - leftRatioXTop, horizonHeight, width / 2 - leftRatioXBottom, height, width / 2 - leftRatioXBottom + 10, height],
+          fill: 'purple',
+          stroke: 'purple',
+          strokeWidth: 1,
+          closed: true,
+          shadowEnabled: true,
+          shadowOpacity: 0.75,
+          shadowColor: 'purple',
+          shadowBlur: 10
+        });
+  
+    verticalLines.push(poly);
+  
+    leftRatioXTop += 50 * 0.95;
+  
+    leftRatioXBottom += 100 * 1.5;
   }
 
-  return yLines;
+  for(var i = 0; i < 30; i++)
+  {
+    var poly = new Konva.Line({
+          points: [width / 2 + rightRatioXTop, horizonHeight, width / 2 + rightRatioXBottom, height, width / 2 +rightRatioXBottom + 10, height],
+          fill: 'purple',
+          stroke: 'purple',
+          strokeWidth: 1,
+          closed: true,
+          shadowEnabled: true,
+          shadowOpacity: 0.75,
+          shadowColor: 'purple',
+          shadowBlur: 10
+        });
+  
+    verticalLines.push(poly);
+  
+    rightRatioXTop += 50 * 0.95;
+  
+    rightRatioXBottom += 100 * 1.5;
+  }
+
+  // add the shape to the layer
+  layer.add(horizon);
+
+  return verticalLines;
 }
 
 //creates a cat object
