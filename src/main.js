@@ -41,6 +41,37 @@ var score = new Konva.Text({
   shadowBlur: 10
 });
 
+//Creates vertical lines for grid
+function createVerticalLines() {
+
+  var yLines = [];
+  var numberOfLines = 8;
+  var xTopRatio = 0.10;
+  var xBottomRatio = -0.50;
+
+  for(var i = 0; i < numberOfLines; i++) {
+    var line = new Konva.Line({
+      points: [(stage.getWidth() * xTopRatio), 25, (stage.getWidth() * xBottomRatio), height],
+      stroke: 'purple',
+      strokeWidth: 5,
+      lineCap: 'round',
+      lineJoin: 'round',
+      shadowEnabled: true,
+      shadowOpacity: 0.75,
+      shadowColor: 'purple',
+      shadowBlur: 10
+    });
+
+    yLines.push(line);
+
+    //Set ratio
+    xTopRatio += 0.115;
+    xBottomRatio += 0.2925;
+  }
+
+  return yLines;
+}
+
 //creates a cat object
 function createCat() {
   //initializes cat values
@@ -62,15 +93,15 @@ function createCat() {
         var angleDiff = frame.timeDiff * angularSpeed / 1000;
         catObject.rotate(angleDiff);
 
-	var curScale = catObject.scale();
-	catObject.scale({
-		x: curScale.x-0.01,
-		y: curScale.y-0.01
-	});
+    var curScale = catObject.scale();
+    catObject.scale({
+      x: curScale.x-0.01,
+      y: curScale.y-0.01
+    });
 
-	var curOpacity = catObject.opacity();
-	if (curOpacity > 0) catObject.opacity(curOpacity-0.02)
-	else catObject.opacity(0);
+    var curOpacity = catObject.opacity();
+    if (curOpacity > 0) catObject.opacity(curOpacity-0.02)
+    else catObject.opacity(0);
   });
 	
   //click event
@@ -92,14 +123,25 @@ function createCat() {
 
 //creates layer
 var layer = new Konva.Layer();
+
 //adds score to layer
 layer.add(score)
+
+//Adds vertical lines for grid
+var verticalLines = createVerticalLines();
+
+for(var i = 0; i < verticalLines.length; i++) {
+  layer.add(verticalLines[i]);
+}
+
+
 // add the layer to the stage
 stage.add(layer);
 
 //loads cat image
 var catImage = new Image();
 catImage.src = './assets/cat1.png';
+
 //initializing function
 catImage.onload = function() {
   //begins game
@@ -116,10 +158,12 @@ var update = () => {
   console.log(currFrame++);
   score.setAttr('text', catCount);
 }
+
 //draws entities
 var draw = () => {
   layer.draw();
 }
+
 //game loop
 function loop() {
   update()
