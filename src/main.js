@@ -59,16 +59,13 @@ var horizon = new Konva.Line({
 function createVerticalLines() {
   var verticalLines = [];
 
-  var leftRatioXTop = 10;
-  var leftRatioXBottom = 100;
-
-  var rightRatioXTop = 10;
-  var rightRatioXBottom = 100;
+  var ratioXTop = 10;
+  var ratioXBottom = 100;
 
   for(var i = 0; i < 30; i++)
   {
-    var poly = new Konva.Line({
-          points: [width / 2 - leftRatioXTop, horizonHeight, width / 2 - leftRatioXBottom, height, width / 2 - leftRatioXBottom + 10, height],
+    var leftLine = new Konva.Line({
+          points: [width / 2 - ratioXTop, horizonHeight, width / 2 - ratioXBottom, height, width / 2 - ratioXBottom + 10, height],
           fill: 'purple',
           stroke: 'purple',
           strokeWidth: 1,
@@ -78,37 +75,27 @@ function createVerticalLines() {
           shadowColor: 'purple',
           shadowBlur: 10
         });
-  
-    verticalLines.push(poly);
-  
-    leftRatioXTop += 50 * 0.95;
-  
-    leftRatioXBottom += 100 * 1.5;
-  }
+    
+    var rightLine = new Konva.Line({
+        points: [width / 2 + ratioXTop, horizonHeight, width / 2 + ratioXBottom, height, width / 2 +ratioXBottom + 10, height],
+        fill: 'purple',
+        stroke: 'purple',
+        strokeWidth: 1,
+        closed: true,
+        shadowEnabled: true,
+        shadowOpacity: 0.75,
+        shadowColor: 'purple',
+        shadowBlur: 10
+      });
 
-  for(var i = 0; i < 30; i++)
-  {
-    var poly = new Konva.Line({
-          points: [width / 2 + rightRatioXTop, horizonHeight, width / 2 + rightRatioXBottom, height, width / 2 +rightRatioXBottom + 10, height],
-          fill: 'purple',
-          stroke: 'purple',
-          strokeWidth: 1,
-          closed: true,
-          shadowEnabled: true,
-          shadowOpacity: 0.75,
-          shadowColor: 'purple',
-          shadowBlur: 10
-        });
-  
-    verticalLines.push(poly);
-  
-    rightRatioXTop += 50 * 0.95;
-  
-    rightRatioXBottom += 100 * 1.5;
-  }
+    verticalLines.push(leftLine);
 
-  // add the shape to the layer
-  layer.add(horizon);
+    verticalLines.push(rightLine);
+  
+    ratioXTop += 50 * 0.95;
+  
+    ratioXBottom += 100 * 1.5;
+  }
 
   return verticalLines;
 }
@@ -167,6 +154,9 @@ var layer = new Konva.Layer();
 
 //adds score to layer
 layer.add(score)
+
+// add horizon to landscape
+layer.add(horizon);
 
 //Adds vertical lines for grid
 var verticalLines = createVerticalLines();
