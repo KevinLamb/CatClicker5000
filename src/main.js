@@ -100,6 +100,37 @@ function createVerticalLines() {
   return verticalLines;
 }
 
+function createHorizontalLines() {
+  var horizontalLines = [];
+  var thickness = 10;
+  var ratioY = 0;
+  var reducePecentage = 1.0;
+
+  for(var i = 0; i < 8; i++)
+  {
+    var horizontalLine = new Konva.Line({
+      points: [1, stage.getHeight() - ratioY, width, stage.getHeight() - ratioY, width, stage.getHeight() - ratioY - thickness, 1, stage.getHeight() - ratioY - thickness],
+      fill: 'purple',
+      stroke: 'purple',
+      strokeWidth: 2,
+      closed: true,
+      shadowEnabled: true,
+      shadowOpacity: 0.75,
+      shadowColor: 'purple',
+      shadowBlur: 10
+    });
+
+    ratioY += stage.getHeight() / 10 * reducePecentage;
+
+    reducePecentage -= 0.1;
+    thickness -= 1.25;
+
+    horizontalLines.push(horizontalLine);
+  }
+
+  return horizontalLines;
+}
+
 //creates a cat object
 function createCat() {
   //initializes cat values
@@ -165,6 +196,12 @@ for(var i = 0; i < verticalLines.length; i++) {
   layer.add(verticalLines[i]);
 }
 
+//Adds horizontal lines for grid
+var horizontalLines = createHorizontalLines();
+
+for(var i = 0; i < horizontalLines.length; i++) {
+  layer.add(horizontalLines[i]);
+}
 
 // add the layer to the stage
 stage.add(layer);
