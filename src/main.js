@@ -55,6 +55,19 @@ var horizon = new Konva.Line({
   shadowBlur: 10
 });
 
+var sun = new Konva.Circle({
+  x: stage.getWidth() / 2,
+  y: horizonHeight - 150,
+  radius: 100,
+  fillLinearGradientStartPoint: { x: 50, y: 0 },
+  fillLinearGradientEndPoint: { x: 50, y: 50 },
+  fillLinearGradientColorStops: [0, 'yellow', 1, 'orange'],
+  shadowEnabled: true,
+  shadowOpacity: 0.75,
+  shadowColor: 'yellow',
+  shadowBlur: 15
+});
+
 //Creates vertical lines for grid
 function createVerticalLines() {
   var verticalLines = [];
@@ -162,7 +175,6 @@ function createTweens(horizontalLines) {
   return tweens;
 }
 
-
 //creates a cat object
 function createCat() {
   //initializes cat values
@@ -220,6 +232,9 @@ layer.add(score)
 
 // add horizon to landscape
 layer.add(horizon);
+
+// Add the sun
+layer.add(sun);
 
 //Adds vertical lines for grid
 var verticalLines = createVerticalLines();
