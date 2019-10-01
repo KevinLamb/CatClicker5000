@@ -131,6 +131,38 @@ function createHorizontalLines() {
   return horizontalLines;
 }
 
+function createTweens(horizontalLines) {
+  var tweens = [];
+  var thickness = 10;
+  var ratioY = 0;
+  var reducePecentage = 1.0;
+
+  for(var i = 0; i < 8; i++) {
+    ratioY += stage.getHeight() / 10 * reducePecentage;
+
+    reducePecentage -= 0.1;
+    thickness -= 1.25;
+
+    var tween = new Konva.Tween({
+      node: horizontalLines[i],
+      duration: 1,
+      points: [1, stage.getHeight() - ratioY, width, stage.getHeight() - ratioY, width, stage.getHeight() - ratioY - thickness, 1, stage.getHeight() - ratioY - thickness],
+      scaleX: 1.0,
+      onFinish: function() {
+        for(var i = 0; i < 7; i++) {
+          tweens[i].reset();
+          tweens[i].play();
+        }
+      }
+    });
+
+    tweens.push(tween);
+  } 
+
+  return tweens;
+}
+
+
 //creates a cat object
 function createCat() {
   //initializes cat values
@@ -198,9 +230,14 @@ for(var i = 0; i < verticalLines.length; i++) {
 
 //Adds horizontal lines for grid
 var horizontalLines = createHorizontalLines();
+var tweens = createTweens(horizontalLines);
 
 for(var i = 0; i < horizontalLines.length; i++) {
   layer.add(horizontalLines[i]);
+
+  if(i != 7) {
+    tweens[i].play();
+  }
 }
 
 // add the layer to the stage
