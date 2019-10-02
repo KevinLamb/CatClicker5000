@@ -113,6 +113,7 @@ function createVerticalLines() {
   return verticalLines;
 }
 
+//Creates horizontal lines for grid
 function createHorizontalLines() {
   var horizontalLines = [];
   var thickness = 10;
@@ -144,13 +145,14 @@ function createHorizontalLines() {
   return horizontalLines;
 }
 
+//Creates tweens to move horizontal lines in grid
 function createTweens(horizontalLines) {
   var tweens = [];
   var thickness = 10;
   var ratioY = 0;
   var reducePecentage = 1.0;
 
-  for(var i = 0; i < 8; i++) {
+  for(var i = 0; i < 7; i++) {
     ratioY += stage.getHeight() / 10 * reducePecentage;
 
     reducePecentage -= 0.1;
@@ -245,14 +247,17 @@ for(var i = 0; i < verticalLines.length; i++) {
 
 //Adds horizontal lines for grid
 var horizontalLines = createHorizontalLines();
-var tweens = createTweens(horizontalLines);
+
 
 for(var i = 0; i < horizontalLines.length; i++) {
   layer.add(horizontalLines[i]);
+}
 
-  if(i != 7) {
-    tweens[i].play();
-  }
+//Create tweens for moving lines (lines need to be in layer first)
+var tweens = createTweens(horizontalLines);
+
+for(var i = 0; i < tweens.length; i++) {
+  tweens[i].play();
 }
 
 // add the layer to the stage
