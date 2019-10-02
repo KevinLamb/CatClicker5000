@@ -1,3 +1,27 @@
-body {
-  margin: 0px;
+@import url('https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Turret+Road&display=swap');
+
+html, body {
+  overflow: hidden;
+  background-color: #414a4c;
+}
+
+#buttons {
+  position: relative;
+  top: -100px;
+}
+
+button {
+  border: 0.5px, 0.5px, 0.5px, 0.5px;
+  border-radius: 5%;
+  border-color: hotpink;
+  background: purple;
+  color: hotpink;
+  font-family: 'Permanent Marker', cursive;
+  font-size: 20px;
+  text-shadow: 0 0 12px hotpink;
+}
+
+button:hover {
+  text-shadow: 0 0 13px rgb(252, 184, 218);
 }
